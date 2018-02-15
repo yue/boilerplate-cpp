@@ -34,8 +34,11 @@ if (!arch) {
   }[narch]
 }
 
-const libyue_dir = path.resolve('libyue', version, platform, arch)
-if (fs.existsSync(libyue_dir)) {
+const libyueDir = path.resolve('libyue')
+const libyueChecksum = path.join(libyueDir, '.version')
+const checksum = `${version}|${platform}|${arch}`
+if (fs.existsSync(libyueChecksum) &&
+    fs.readFileSync(libyueChecksum).toString() == checksum) {
   process.exit(0)
 }
 
@@ -44,11 +47,12 @@ const zipname = `libyue_${version}_${platform}_${arch}.zip`
 const url = `${mirror}/${version}/${zipname}`
 
 download(url, (response) => {
-  mkdir(libyue_dir)
-  const zippath = path.join(libyue_dir, zipname)
+  mkdir(libyueDir)
+  const zippath = path.join(libyueDir, zipname)
   response.on('end', () => {
-    extract(zippath, {dir: libyue_dir}, (error) => {
+    extract(zippath, {dir: libyueDir}, (error) => {
       fs.unlinkSync(zippath)
+      fs.writeFileSync(libyueChecksum, checksum)
     })
   })
   response.pipe(fs.createWriteStream(zippath))
