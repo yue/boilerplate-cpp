@@ -24,12 +24,14 @@ if (!platform) {
 }
 
 if (!arch) {
+  const narch = process.env.npm_config_arch ? process.env.npm_config_arch
+                                            : process.arch
   arch = {
     x64: 'x64',
     ia32: 'x86',
     arm: 'arm',
     arm64: 'arm64',
-  }[process.arch]
+  }[narch]
 }
 
 const libyue_dir = path.resolve('libyue', version, platform, arch)
