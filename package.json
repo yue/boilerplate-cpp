@@ -1,0 +1,17 @@
+{
+  "name": "muban",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Build desktop apps with system webview and native controls",
+  "scripts": {
+    "install": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yue/muban.git"
+  },
+  "license": "public domain",
+  "devDependencies": {
+    "asar": "0.14.x"
+  }
+}
