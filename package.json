@@ -11,7 +11,8 @@
     "install": "npm run download && npm run bootstrap && npm run build",
     "download": "node scripts/download_libyue.js $npm_package_config_libyue_version",
     "bootstrap": "node scripts/bootstrap.js",
-    "build": "node scripts/build.js"
+    "build": "node scripts/build.js",
+    "dist": "node scripts/dist.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "asar": "0.14.x",
     "cmake-binaries": "1.0.5-2",
-    "extract-zip": "1.6.6"
+    "extract-zip": "1.6.6",
+    "yazl": "2.4.3"
   }
 }

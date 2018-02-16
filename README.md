@@ -15,10 +15,11 @@ cross-platform desktop apps with system webview and native GUI widgets.
 
 ## How to use
 
-1. Clone the project.
-2. Put your web app in `app/`.
-3. Run `npm install`.
-4. Check `out/` for result.
+1. Clone the project
+2. Put your web app in `app/`
+3. `npm install` to build
+4. `npm start` to start the app
+5. `npm run dist` to create distribution
 
 ## Docs
 
