@@ -73,7 +73,7 @@ void process(const char *ifname, const char *ofname)
 		if (!isalnum(*p))
 			*p = '_';
 	}
-	fprintf(ofile, "static %sunsigned char %s[] = {\n", useconst ? "const " : "", buf);
+	fprintf(ofile, "static %schar %s[] = {\n", useconst ? "const " : "", buf);
 	int c, col = 1;
 	while ((c = myfgetc(ifile)) != EOF)
 	{
