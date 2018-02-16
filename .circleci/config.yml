@@ -28,7 +28,7 @@ jobs:
       - *install-deps
       - *install-node
       - checkout
-      - run: npm install
+      - run: npm install --unsafe-perm
       - run: npm run dist
 
 workflows:
