@@ -3,6 +3,10 @@
 #include "base/command_line.h"
 #include "nativeui/nativeui.h"
 
+// Generated from the ENCRYPTION_KEY file.
+#include "encryption_key.h"
+static_assert(sizeof(ENCRYPTION_KEY) == 16, "ENCRYPTION_KEY must be 16 bytes");
+
 #if defined(OS_WIN)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
   base::CommandLine::Init(0, nullptr);

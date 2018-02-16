@@ -1,24 +1,41 @@
 cmake_minimum_required(VERSION 3.1)
 
-# Have to set this before creating project.
-set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
-
+# Makefiles do not work without a build type.
 if((CMAKE_GENERATOR STREQUAL "Unix Makefiles") AND (NOT CMAKE_BUILD_TYPE))
   message(FATAL_ERROR "You must specify a build type.")
 endif()
 
+# Target macOS version, Have to set this before creating project.
+set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
+
+# Project name and executable name.
 project(muban)
 set(APP_NAME "muban")
 
-file(GLOB APP_SRC "*.h" "*.cc")
-add_executable(${APP_NAME} ${APP_SRC})
+# Utility executable, not shipped in final product.
+add_executable(bin2c bin2c.c)
 
+# The main executable.
+file(GLOB APP_SRC "*.h" "*.cc")
+add_executable(${APP_NAME}
+               ${APP_SRC} "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h")
+
+# Convert the ENCRYPTION_KEY file into encryption_key.h
+add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
+                   COMMAND bin2c -c ../ENCRYPTION_KEY ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
+                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                   DEPENDS bin2c ../ENCRYPTION_KEY)
+target_include_directories(${APP_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
+
+# Get the absolute path the libyue.
 get_filename_component(LIBYUE_DIR
                        "${CMAKE_SOURCE_DIR}/../libyue"
                        ABSOLUTE)
 
-
+# Add libyue to include dirs.
 target_include_directories(${APP_NAME} PRIVATE "${LIBYUE_DIR}/include")
+
+# Use C++14 standard.
 set_target_properties(${APP_NAME} PROPERTIES
                       CXX_STANDARD 14
                       CXX_STANDARD_REQUIRED ON
