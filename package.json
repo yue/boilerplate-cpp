@@ -7,7 +7,10 @@
     "libyue_version": "v0.2.1"
   },
   "scripts": {
-    "install": "scripts/download_libyue.js $npm_package_config_libyue_version"
+    "install": "npm run download && npm run bootstrap && npm run build",
+    "download": "scripts/download_libyue.js $npm_package_config_libyue_version",
+    "bootstrap": "scripts/bootstrap.js",
+    "build": "scripts/build.js"
   },
   "repository": {
     "type": "git",

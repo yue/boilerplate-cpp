@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {download, mkdir} = require('./common')
+const {targetCpu, download, mkdir} = require('./common')
 
 const fs      = require('fs')
 const path    = require('path')
@@ -24,14 +24,7 @@ if (!platform) {
 }
 
 if (!arch) {
-  const narch = process.env.npm_config_arch ? process.env.npm_config_arch
-                                            : process.arch
-  arch = {
-    x64: 'x64',
-    ia32: 'x86',
-    arm: 'arm',
-    arm64: 'arm64',
-  }[narch]
+  arch = targetCpu
 }
 
 const libyueDir = path.resolve('libyue')

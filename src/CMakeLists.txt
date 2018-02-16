@@ -7,8 +7,8 @@ if((CMAKE_GENERATOR STREQUAL "Unix Makefiles") AND (NOT CMAKE_BUILD_TYPE))
   message(FATAL_ERROR "You must specify a build type.")
 endif()
 
-project(Muban)
-set(APP_NAME "Muban")
+project(muban)
+set(APP_NAME "muban")
 
 file(GLOB APP_SRC "*.h" "*.cc")
 add_executable(${APP_NAME} ${APP_SRC})
