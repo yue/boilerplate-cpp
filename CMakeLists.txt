@@ -13,23 +13,23 @@ project(muban)
 set(APP_NAME "muban")
 
 # Utility executable, not shipped in final product.
-add_executable(bin2c bin2c.c)
+add_executable(bin2c src/bin2c.c)
 
 # The main executable.
-file(GLOB APP_SRC "*.h" "*.cc")
+file(GLOB APP_SRC "src/*.h" "src/*.cc")
 add_executable(${APP_NAME}
                ${APP_SRC} "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h")
 
 # Convert the ENCRYPTION_KEY file into encryption_key.h
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
-                   COMMAND bin2c -c ../ENCRYPTION_KEY ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
+                   COMMAND bin2c -c ENCRYPTION_KEY ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                   DEPENDS bin2c ../ENCRYPTION_KEY)
+                   DEPENDS bin2c ENCRYPTION_KEY)
 target_include_directories(${APP_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
 
 # Get the absolute path the libyue.
 get_filename_component(LIBYUE_DIR
-                       "${CMAKE_SOURCE_DIR}/../libyue"
+                       "${CMAKE_SOURCE_DIR}/libyue"
                        ABSOLUTE)
 
 # Add libyue to include dirs.
