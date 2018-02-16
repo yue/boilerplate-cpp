@@ -1,4 +1,4 @@
-# muban
+# Muban
 
 A template of the [Yue library](https://github.com/yue/yue) for building
 cross-platform desktop apps with system webview and native GUI widgets.
