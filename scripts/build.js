@@ -3,7 +3,7 @@
 const {targetCpu, spawnSync} = require('./common')
 
 const name = require('../package.json').name
-const config = process.argv[3] === 'Debug' ? 'Debug' : 'Release'
+const config = process.argv[2] === 'Debug' ? 'Debug' : 'Release'
 
 if (process.platform == 'win32') {
   const platform = targetCpu == 'x64' ? 'Win64' : 'Win32'
