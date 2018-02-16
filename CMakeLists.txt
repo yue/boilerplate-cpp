@@ -16,15 +16,15 @@ set(APP_NAME "muban")
 add_executable(bin2c src/bin2c.c)
 
 # The main executable.
-file(GLOB APP_SRC "src/*.h" "src/*.cc")
+file(GLOB SRC_FILES "src/*.h" "src/*.cc")
 add_executable(${APP_NAME}
-               ${APP_SRC} "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h")
+               ${SRC_FILES} "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h")
 
 # Convert the ENCRYPTION_KEY file into encryption_key.h
-add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
-                   COMMAND bin2c -c ENCRYPTION_KEY ${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h"
+                   COMMAND bin2c -c ENCRYPTION_KEY "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h"
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                   DEPENDS bin2c ENCRYPTION_KEY)
+                   DEPENDS bin2c "${CMAKE_CURRENT_SOURCE_DIR}/ENCRYPTION_KEY")
 target_include_directories(${APP_NAME} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
 
 # Get the absolute path the libyue.
@@ -40,6 +40,15 @@ set_target_properties(${APP_NAME} PROPERTIES
                       CXX_STANDARD 14
                       CXX_STANDARD_REQUIRED ON
                       CXX_EXTENSIONS ON)
+
+# Package the app into asar format.
+file(GLOB APP_FILES "app/*")
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/app.ear"
+                   COMMAND node scripts/package.js app "${CMAKE_CURRENT_BINARY_DIR}/app.ear"
+                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                   DEPENDS ${APP_FILES} "${CMAKE_CURRENT_SOURCE_DIR}/ENCRYPTION_KEY")
+add_custom_target(asar ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/app.ear")
+add_dependencies(${APP_NAME} asar)
 
 # macOS configuration.
 if(APPLE)

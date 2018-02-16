@@ -4,10 +4,18 @@ const crypto = require('crypto')
 const fs = require('fs')
 const asar = require('asar')
 
-const key = Buffer.alloc(16, 'sad turtle')
-const iv = 'brave new world!'
+require('./common')
 
-const target = `${__dirname}/docs.ear`
+const key = fs.readFileSync('ENCRYPTION_KEY')
+const iv = 'yue is good lib!'
+
+if (process.argv.length != 4) {
+  console.error('Usage: package.js source target')
+  process.exit(1)
+}
+
+const source = process.argv[2]
+const target = process.argv[3]
 
 function transform() {
   const cipher =  crypto.createCipheriv('aes-128-cbc', key, iv)
@@ -25,7 +33,4 @@ function appendMeta() {
   fs.appendFileSync(target, meta)
 }
 
-asar.createPackageWithOptions(`${__dirname}/out/Dist/docs`,
-                              target,
-                              { transform },
-                              appendMeta)
+asar.createPackageWithOptions(source, target, { transform }, appendMeta)
