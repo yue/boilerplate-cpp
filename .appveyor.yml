@@ -12,7 +12,7 @@ environment:
     - npm_config_arch: ia32
 
 install:
-  - ps: Install-Product node 8.2.1
+  - ps: Install-Product node 8.2.1 x64
   - cmd: SET PATH=C:\Program Files (x86)\MSBuild\14.0\bin\;%PATH%
   - npm install
   - npm run dist
