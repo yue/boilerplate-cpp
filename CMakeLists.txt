@@ -43,7 +43,7 @@ set_target_properties(${APP_NAME} PROPERTIES
                       CXX_EXTENSIONS ON)
 
 # Package the app into asar format.
-file(GLOB APP_FILES "app/*")
+file(GLOB APP_FILES "app/[_a-z]*")
 add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/app.ear"
                    COMMAND node scripts/package.js app "${CMAKE_CURRENT_BINARY_DIR}/app.ear"
                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}

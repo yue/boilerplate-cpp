@@ -1,5 +1,42 @@
+<!DOCTYPE html>
 <html>
 <body>
-Hello World!
+<head>
+<title>CPU Info</title>
+<style type="text/css">
+  body {
+    background-color: #5BC0EB;
+    margin: 0;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  #button {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #FA7921;
+    color: #EEEEEE;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+  }
+  #button:hover {
+    background-color: #FB8A32;
+  }
+  #result {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #FFFFFF;
+  }
+</style>
+</head>
+<body>
+<div id="result"></div>
+<div id="button" onclick="muban.showSysInfo('cpu')">Show CPU Info</div>
+<script type="text/javascript" charset="utf-8">
+  window.report = function(message) {
+    document.getElementById('result').textContent = message
+  }
+</script>
 </body>
 </html>

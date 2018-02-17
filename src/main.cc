@@ -2,6 +2,7 @@
 
 #include "base/base_paths.h"
 #include "base/command_line.h"
+#include "base/cpu.h"
 #include "base/path_service.h"
 #include "nativeui/nativeui.h"
 
@@ -21,6 +22,14 @@ nu::ProtocolJob* CustomProtocolHandler(const std::string& url) {
   return job;
 }
 
+// An example native binding.
+void ShowSysInfo(nu::Browser* browser, const std::string& request) {
+  if (request == "cpu") {
+    browser->ExecuteJavaScript(
+        "window.report('" + base::CPU().cpu_brand() + "')", nullptr);
+  }
+}
+
 #if defined(OS_WIN)
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
   base::CommandLine::Init(0, nullptr);
@@ -37,22 +46,27 @@ int main(int argc, const char *argv[]) {
 
   // Create window with default options.
   scoped_refptr<nu::Window> window(new nu::Window(nu::Window::Options()));
-  window->SetContentSize(nu::SizeF(800, 600));
+  window->SetContentSize(nu::SizeF(400, 200));
+  window->Center();
+
+  // Quit when window is closed.
+  window->on_close.Connect([](nu::Window*) {
+    nu::MessageLoop::Quit();
+  });
 
   // Create the webview.
   nu::Browser::RegisterProtocol("muban", &CustomProtocolHandler);
   scoped_refptr<nu::Browser> browser(new nu::Browser());
   browser->LoadURL("muban://app/index.html");
+  browser->SetBindingName("muban");
+  browser->AddBinding("showSysInfo", &ShowSysInfo);
   window->SetContentView(browser.get());
 
-  // Quit when window is closed.
-  window->on_close.Connect([&state](nu::Window*) {
-    nu::MessageLoop::Quit();
+  // Show window when page is loaded.
+  browser->on_finish_navigation.Connect([window](nu::Browser* browser,
+                                                 const std::string& url) {
+    window->Activate();
   });
-
-  // Show window.
-  window->Center();
-  window->Activate();
 
   // Enter message loop.
   nu::MessageLoop::Run();
