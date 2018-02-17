@@ -65,7 +65,6 @@ int main(int argc, const char *argv[]) {
   // Create the webview.
   nu::Browser::RegisterProtocol("muban", &CustomProtocolHandler);
   scoped_refptr<nu::Browser> browser(new nu::Browser());
-  browser->LoadURL("muban://app/index.html");
   browser->SetBindingName("muban");
   browser->AddBinding("showSysInfo", &ShowSysInfo);
   window->SetContentView(browser.get());
@@ -75,6 +74,7 @@ int main(int argc, const char *argv[]) {
                                                  const std::string& url) {
     window->Activate();
   });
+  browser->LoadURL("muban://app/index.html");
 
   // Enter message loop.
   nu::MessageLoop::Run();
