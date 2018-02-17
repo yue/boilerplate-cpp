@@ -11,6 +11,11 @@ if (process.platform == 'win32') {
       msbuild,
       [`${name}.sln`, `/p:Configuration=${config}`, `/p:Platform=${targetCpu}`],
       {cwd: 'out'}).status)
+} else if (process.platform == 'darwin') {
+  process.exit(spawnSync(
+      'xcodebuild',
+      ['-configuration', config],
+      {cwd: 'out'}).status)
 } else {
   process.exit(spawnSync('make', [], {cwd: `out/${config}`}).status)
 }

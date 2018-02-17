@@ -13,6 +13,10 @@ if (process.platform == 'win32') {
   process.exit(spawnSync(cmake,
                          ['..', '-G', generator],
                          {cwd: 'out'}).status)
+} else if (process.platform == 'darwin') {
+  process.exit(spawnSync(cmake,
+                         ['..', '-G', 'Xcode'],
+                         {cwd: 'out'}).status)
 } else {
   mkdir('out/Release')
   let code = spawnSync(cmake,

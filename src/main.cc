@@ -43,7 +43,7 @@ int main(int argc, const char *argv[]) {
   PathService::Get(base::FILE_EXE, &g_app_path);
 #else
   PathService::Get(base::DIR_EXE, &g_app_path);
-#if defined(OS_WIN)
+#if defined(OS_WIN) || defined(OS_MACOSX)
   g_app_path = g_app_path.DirName();
 #endif
   g_app_path = g_app_path.Append(FILE_PATH_LITERAL("app.ear"));
