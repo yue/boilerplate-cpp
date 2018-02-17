@@ -3,13 +3,10 @@
   "private": true,
   "version": "0.1.0",
   "description": "Build desktop apps with system webview and native controls",
-  "config": {
-    "libyue_version": "v0.2.1"
-  },
   "scripts": {
     "start": "node scripts/run.js",
     "install": "npm run download && npm run bootstrap && npm run build",
-    "download": "node scripts/download_libyue.js $npm_package_config_libyue_version",
+    "download": "node scripts/download_libyue.js v0.2.1",
     "bootstrap": "node scripts/bootstrap.js",
     "build": "node scripts/build.js",
     "dist": "node scripts/dist.js"
