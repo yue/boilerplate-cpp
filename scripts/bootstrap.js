@@ -7,11 +7,19 @@ const {targetCpu, cmake, mkdir, spawnSync} = require('./common')
 mkdir('out')
 
 if (process.platform == 'win32') {
-  const arch = targetCpu == 'x64' ? 'Win64' : 'Win32'
-  spawnSync(cmake, ['..', '-G', `Visual Studio 14 ${arch}`])
+  let generator = 'Visual Studio 14'
+  if (targetCpu == 'x64')
+    generator += ' Win64'
+  process.exit(spawnSync(cmake, ['..', '-G', generator]).status)
 } else {
   mkdir('out/Release')
-  spawnSync(cmake, ['-D', `CMAKE_BUILD_TYPE=Release`, '../..'], {cwd: 'out/Release'})
+  let code = spawnSync(cmake,
+                       ['-D', `CMAKE_BUILD_TYPE=Release`, '../..'],
+                       {cwd: 'out/Release'}).status
+  if (code != 0)
+    process.exit(code)
   mkdir('out/Debug')
-  spawnSync(cmake, ['-D', `CMAKE_BUILD_TYPE=Debug`, '../..'], {cwd: 'out/Debug'})
+  process.exit(spawnSync(cmake,
+                         ['-D', `CMAKE_BUILD_TYPE=Debug`, '../..'],
+                         {cwd: 'out/Debug'}).status)
 }
