@@ -10,7 +10,7 @@ const key = fs.readFileSync('ENCRYPTION_KEY')
 const iv = 'yue is good lib!'
 
 if (process.argv.length != 4) {
-  console.error('Usage: package.js source target')
+  console.error('Usage: asar.js source target')
   process.exit(1)
 }
 
