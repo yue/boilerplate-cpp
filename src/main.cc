@@ -10,13 +10,13 @@
 #include "encryption_key.h"
 static_assert(sizeof(ENCRYPTION_KEY) == 16, "ENCRYPTION_KEY must be 16 bytes");
 
+// Path to app's asar archive.
+static base::FilePath g_app_path;
+
 // Handle custom protocol.
 nu::ProtocolJob* CustomProtocolHandler(const std::string& url) {
-  base::FilePath exe_path;
-  if (!PathService::Get(base::FILE_EXE, &exe_path))
-    return nullptr;
   std::string path = url.substr(sizeof("muban://app/") - 1);
-  nu::ProtocolAsarJob* job = new nu::ProtocolAsarJob(exe_path, path);
+  nu::ProtocolAsarJob* job = new nu::ProtocolAsarJob(g_app_path, path);
   job->SetDecipher(std::string(ENCRYPTION_KEY, sizeof(ENCRYPTION_KEY)),
                    std::string("yue is good lib!"));
   return job;
@@ -36,6 +36,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #else
 int main(int argc, const char *argv[]) {
   base::CommandLine::Init(argc, argv);
+#endif
+
+  // In Debug build, load from app.ear; in Release build, load from exe path.
+#if defined(NDEBUG)
+  PathService::Get(base::FILE_EXE, &g_app_path);
+#else
+  PathService::Get(base::DIR_EXE, &g_app_path);
+  g_app_path = g_app_path.Append(FILE_PATH_LITERAL("app.ear"));
 #endif
 
   // Intialize GUI toolkit.

@@ -4,19 +4,25 @@ const fs = require('fs')
 const path = require('path')
 const yazl = require('yazl')
 
-const {targetCpu} = require('./common')
+const {targetCpu, execSync} = require('./common')
 
 const {name, version} = require('../package.json')
-const config = process.argv[2] === 'Debug' ? 'Debug' : 'Release'
 
+// Release build.
+execSync('node scripts/build.js Release')
+
+// Path to generated exe.
+const outpath = process.platform === 'win32' ? 'out/build/Release'
+                                             : 'out/Release'
+const exepath = process.platform === 'win32' ? `${outpath}/${name}.exe`
+                                             : `${outpath}/${name}`
+
+// Concat the exe and app.ear.
+fs.appendFileSync(exepath, fs.readFileSync(`${outpath}/app.ear`))
+
+// Create zip.
 const zip = new yazl.ZipFile
 zip.addFile('libyue/LICENSE', 'LICENSE')
-
-if (process.platform == 'win32') {
-  zip.addFile(`out/build/${config}/${name}.exe`, `${name}.exe`)
-} else {
-  zip.addFile(`out/${config}/${name}`, name, { mode: parseInt("0100755", 8) })
-}
-
+zip.addFile(exepath, path.basename(exepath), { mode: parseInt("0100755", 8) })
 zip.outputStream.pipe(fs.createWriteStream(`${name}-v${version}-${targetCpu}.zip`))
 zip.end()

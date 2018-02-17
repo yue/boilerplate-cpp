@@ -14,7 +14,6 @@ set(APP_NAME "muban")
 
 # Utility executables, not shipped in final product.
 add_executable(bin2c tools/bin2c.c)
-add_executable(append tools/append.c)
 
 # The main executable.
 file(GLOB SRC_FILES "src/*.h" "src/*.cc")
@@ -50,10 +49,6 @@ add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/app.ear"
                    DEPENDS ${APP_FILES} "${CMAKE_CURRENT_SOURCE_DIR}/ENCRYPTION_KEY")
 add_custom_target(asar ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/app.ear")
 add_dependencies(${APP_NAME} asar)
-
-# Concate the asar archive into the executable.
-add_custom_command(TARGET ${APP_NAME} POST_BUILD
-                   COMMAND append $<TARGET_FILE:${APP_NAME}> app.ear)
 
 # macOS configuration.
 if(APPLE)
