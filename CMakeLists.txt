@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.4)
 
 # Makefiles do not work without a build type.
 if((CMAKE_GENERATOR STREQUAL "Unix Makefiles") AND (NOT CMAKE_BUILD_TYPE))
@@ -13,7 +13,7 @@ project(muban)
 set(APP_NAME "muban")
 
 # The main executable.
-file(GLOB SRC_FILES "src/*.h" "src/*.cc")
+file(GLOB SRC_FILES "src/*.h" "src/*.cc" "src/*.rc" "src/*.xml" "src/*.ico")
 add_executable(${APP_NAME}
                ${SRC_FILES} "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h")
 
