@@ -14,6 +14,28 @@ scripts.
 * `CMakeLists.txt` - The CMake configuration for buliding the project.
 * `ENCRYPTION_KEY` - The 16 bytes key used for encrypting the web app.
 
+## System requirements
+
+The Yue library requires C++14 for building, so only newer versions of
+toolchains are supported.
+
+* Linux:
+  * GCC >=6 or clang
+  * libstdc++6 or newer
+  * libwebkit2gtk >= 2.8
+* macOS:
+  * XCode >= 8.3
+  * The OS X 10.12 SDK
+* Windows:
+  * Visual Studio 2017 Update 3.2 with the 15063 (Creators Update) Windows SDK
+
+Note that on Linux due to using libstdc++6 and libwebkit2gtk 2.8, the generated
+binary can only run on newer distributions at least Ubuntu 16.04 and Debian
+Stretch.
+
+On macOS due to using the `WKWebView` API, only macOS 10.10 and later are
+supported.
+
 ## Building
 
 While it is possible to only use `cmake` to build this project, there are `npm`
