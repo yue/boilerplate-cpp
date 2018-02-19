@@ -73,9 +73,9 @@ int main(int argc, const char *argv[]) {
   window->SetContentView(browser.get());
 
   // Show window when page is loaded.
-  browser->on_finish_navigation.Connect([window](nu::Browser* browser,
-                                                 const std::string& url) {
-    window->Activate();
+  browser->on_finish_navigation.Connect([](nu::Browser* browser,
+                                           const std::string& url) {
+    browser->GetWindow()->Activate();
   });
   browser->LoadURL("muban://app/index.html");
 
