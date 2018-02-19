@@ -32,6 +32,11 @@ cross-platform desktop apps with system webview and native GUI widgets.
 
 Public domain.
 
+## Contributions
+
+Since this project mostly serves as a template with minimal features, pull
+requests to add new features might be rejected.
+
 ## Limitations
 
 Please consider following limitations before writing your app with Yue, some of
@@ -43,8 +48,8 @@ Due to using system webview, there is no way to choose browser engine or browser
 version, so we can not control how web page is rendered or which HTML5 features
 are available, thus the pain of browser compatibility.
 
-The good news is, because Yue use `webkit2gtk` on Linux and `WKWebView` on
-macOS, you can still expect modern web engines on these two platforms.
+The good news is, because Yue uses `webkit2gtk` on Linux and `WKWebView` on
+macOS, you can at least expect modern web engines on these two platforms.
 
 The APIs provided in Yue are also highly limited to what system APIs have, and
 we can only provide APIs based on existing system APIs.

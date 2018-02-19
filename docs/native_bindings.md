@@ -1,14 +1,15 @@
 # Add native bindings to web pages
 
-While due to limitations of system webview APIs, we are unable to provide direct
-acess to web pages' DOM trees, but it is still possible to provide a way to
-invoke native code from web pages, and post messages native code to web pages.
+Due to limitations of system webview APIs, we are unable to provide direct
+access to web pages' DOM trees, but it is still possible to provide a way to
+invoke native code from web pages, and post messages from native code to web
+pages.
 
 ## Native bindings
 
-By calling the `nu::Browser::AddBinding` API, you can bind arbitrary C++ to
-web pages as long as the C++ parameters can be converted from JavaScript
-automatically.
+By calling the `nu::Browser::AddBinding` API, you can bind arbitrary C++
+function to web pages as long as the C++ parameters can be converted from
+JavaScript automatically.
 
 For example adding a `window.storeIntRecord` binding:
 
@@ -44,15 +45,15 @@ automatic conversion of other parameters.
 ## Binding name
 
 By default the native bindings are added to the `window` object, by calling the
-`nu::Browser::SetBindingName(name)` API, you can direct Yue to add the bindings
-to the `window[name]` object instead.
+`nu::Browser::SetBindingName(name)` API, you can make Yue dd the bindings to
+the `window[name]` object instead.
 
 ## Native bindings are called asynchronously
 
 Due to the multi-processes architecture used by WebKit2 engine, the native
-bindings are not called from web pages in the same process. Whenever you call a
-native binding from the web page, internally a inter-process-message will be
-sent and the native bindings are called asynchronously.
+bindings are not called from web pages in the same process. Whenever you invoke
+native binding from the web page, internally an inter-process-message will be
+sent and the native function will be called asynchronously.
 
 So it is impossible for native bindings to return values to web pages, the only
 way for communication is to send a message back by calling the
@@ -84,7 +85,7 @@ browser->AddBinding("lambda", [](base::Value arg) {
 });
 ```
 
-But note that the lambda must have NO captures, because we have to deduce the
+But note that the lambdas must have NO captures, because we have to deduce the
 type of arguments at compile-time, and we are unable to do so for lambdas with
 captures.
 

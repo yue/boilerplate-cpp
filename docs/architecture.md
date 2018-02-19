@@ -1,12 +1,12 @@
 # Architecture of Muban
 
-Muban is a C++ project using CMake for building, Node.js is also used for build
-scripts.
+Muban is a C++ project using CMake for building, Node.js is also used for the
+build scripts.
 
 ## Source code structure
 
 * `app/` - The web app.
-* `src/` - The C++ code for creating window and load the web app.
+* `src/` - The C++ code for creating window and loading the web app.
 * `libyue/` - Downloaded static libraries of `Yue`.
 * `node_modules/` - Third party Node.js modules installed by `npm`.
 * `scripts/` - Scripts for building the project.
@@ -16,25 +16,30 @@ scripts.
 
 ## System requirements
 
-The Yue library requires C++14 for building, so only newer versions of
-toolchains are supported.
+The Yue library requires C++14 for building, so newer toolchains are required.
 
 * Linux:
   * GCC >=6 or clang
   * libstdc++6 or newer
   * libwebkit2gtk >= 2.8
+  * Node.js >= 8
 * macOS:
-  * XCode >= 8.3
+  * Xcode >= 8.3
   * The OS X 10.12 SDK
+  * Node.js >= 8
 * Windows:
   * Visual Studio 2017 Update 3.2 with the 15063 (Creators Update) Windows SDK
+  * An x64 machine with Node.js x64 >= 8 installed.
 
 Note that on Linux due to using libstdc++6 and libwebkit2gtk 2.8, the generated
-binary can only run on newer distributions at least Ubuntu 16.04 and Debian
-Stretch.
+binary can only run on newer distributions, e.g. at least Ubuntu 16.04 and
+Debian Stretch.
 
 On macOS due to using the `WKWebView` API, only macOS 10.10 and later are
 supported.
+
+On Windows currently Windows Vista and later are supported. It should be
+possible to support Windows XP with some efforts, but it is not on our roadmap.
 
 ## Building
 
@@ -57,6 +62,28 @@ Installs all dependencies and build Debug version.
 ### `npm start`
 
 Calls `scripts/run.js` to start the Debug version.
+
+## IDE support
+
+With the power of `cmake`, on macOS a Xcode project will be generated, and on
+Windows a Visual Studio 2017 solution will be generated. So you can develop your
+application by using the IDEs on macOS and Windows.
+
+Also note that due to limitations of `cmake`, we can only build for one CPU
+architecture for one IDE solution, it is not possible to build for both `x86`
+and `x64` within the same IDE solution.
+
+## Cross compilation
+
+I haven't figured out the proper way of doing cross compilation on Linux with
+`cmake`, so currently you can only build for `x86` on a `x86` machine, and so
+are the other architectures.
+
+For Windows you can set the `npm_config_arch` environment variable to specify
+the architecture to build for (`x64` or `ia32`), if not set the target
+architecture would be determined by the value of `process.arch` from Node.js.
+
+For macOS only `x64` target is supported.
 
 ## Packaging
 
