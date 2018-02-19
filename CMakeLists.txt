@@ -35,6 +35,11 @@ target_include_directories(${APP_NAME}
                            PRIVATE "${LIBYUE_DIR}/include"
                            PRIVATE "${LIBYUE_DIR}/${CONFIG_NAME}/include")
 
+# The defines from base library.
+target_compile_definitions(${APP_NAME} PUBLIC
+                           $<$<CONFIG:Debug>:_DEBUG>
+                           $<$<CONFIG:Debug>:DYNAMIC_ANNOTATIONS_ENABLED=1>)
+
 # Use C++14 standard.
 set_target_properties(${APP_NAME} PROPERTIES
                       CXX_STANDARD 14
@@ -56,6 +61,7 @@ if(APPLE)
   find_library(IOKIT IOKit)
   find_library(SECURITY Security)
   find_library(WEBKIT WebKit)
+  target_compile_definitions(${APP_NAME} PUBLIC OFFICIAL_BUILD)
   target_link_libraries(${APP_NAME}
                         ${APPKIT} ${IOKIT} ${SECURITY} ${WEBKIT}
                         optimized ${LIBYUE_DIR}/Release/libyue.a
@@ -66,7 +72,6 @@ endif()
 
 # win32 configuration
 if(WIN32)
-  target_compile_definitions(${APP_NAME} PUBLIC NOMINMAX UNICODE _UNICODE)
   set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                PROPERTY VS_STARTUP_PROJECT ${APP_NAME})
   set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS
@@ -74,6 +79,7 @@ if(WIN32)
                          /DELAYLOAD:powrprof.dll \
                          /DELAYLOAD:dwmapi.dll \
                          /SUBSYSTEM:WINDOWS")
+  target_compile_definitions(${APP_NAME} PUBLIC NOMINMAX UNICODE _UNICODE)
   target_link_libraries(${APP_NAME}
                         setupapi.lib powrprof.lib ws2_32.lib dbghelp.lib
                         shlwapi.lib version.lib winmm.lib psapi.lib dwmapi.lib
@@ -102,6 +108,9 @@ if(UNIX AND NOT APPLE)
                          ${GTK3_CFLAGS_OTHER}
                          ${X11_CFLAGS_OTHER}
                          ${WEBKIT2GTK_CFLAGS_OTHER})
+  target_compile_definitions(${APP_NAME} PUBLIC
+                             USE_GLIB=1 OFFICIAL_BUILD
+                             $<$<CONFIG:Debug>:_GLIBCXX_DEBUG=1>)
   target_link_libraries(${APP_NAME}
                         optimized ${LIBYUE_DIR}/Release/libyue.a
                         debug ${LIBYUE_DIR}/Debug/libyue.a
