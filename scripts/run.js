@@ -3,7 +3,7 @@
 const {spawnSync} = require('./common')
 
 const name = require('../package.json').name
-const config = process.argv[2] === 'Release' ? 'Release' : 'Debug'
+const config = process.argv[2] ? process.argv[2] : 'Debug'
 
 if (process.platform == 'win32') {
   spawnSync(`out/${config}/${name}.exe`, [])

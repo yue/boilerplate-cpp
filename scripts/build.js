@@ -3,7 +3,7 @@
 const {targetCpu, spawnSync} = require('./common')
 
 const name = require('../package.json').name
-const config = process.argv[2] === 'Release' ? 'Release' : 'Debug'
+const config = process.argv[2] ? process.argv[2] : 'Debug'
 
 if (process.platform == 'win32') {
   const msbuild = 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin\\MSBuild.exe'

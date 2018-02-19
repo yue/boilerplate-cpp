@@ -30,7 +30,10 @@ get_filename_component(LIBYUE_DIR
                        ABSOLUTE)
 
 # Add libyue to include dirs.
-target_include_directories(${APP_NAME} PRIVATE "${LIBYUE_DIR}/include")
+set(CONFIG_NAME "$<$<CONFIG:Debug>:Debug>$<$<NOT:$<CONFIG:Debug>>:Release>")
+target_include_directories(${APP_NAME}
+                           PRIVATE "${LIBYUE_DIR}/include"
+                           PRIVATE "${LIBYUE_DIR}/${CONFIG_NAME}/include")
 
 # Use C++14 standard.
 set_target_properties(${APP_NAME} PROPERTIES
@@ -55,8 +58,8 @@ if(APPLE)
   find_library(WEBKIT WebKit)
   target_link_libraries(${APP_NAME}
                         ${APPKIT} ${IOKIT} ${SECURITY} ${WEBKIT}
-                        optimized ${LIBYUE_DIR}/lib/libyue.a
-                        debug ${LIBYUE_DIR}/lib/libyued.a)
+                        optimized ${LIBYUE_DIR}/Release/libyue.a
+                        debug ${LIBYUE_DIR}/Debug/libyue.a)
   set_target_properties(${APP_NAME} PROPERTIES LINK_FLAGS
                         "-Wl,-dead_strip")
 endif()
@@ -76,8 +79,8 @@ if(WIN32)
                         shlwapi.lib version.lib winmm.lib psapi.lib dwmapi.lib
                         propsys.lib comctl32.lib gdi32.lib gdiplus.lib
                         urlmon.lib
-                        optimized ${LIBYUE_DIR}/lib/libyue.lib
-                        debug ${LIBYUE_DIR}/lib/libyued.lib)
+                        optimized ${LIBYUE_DIR}/Release/libyue.lib
+                        debug ${LIBYUE_DIR}/Debug/libyue.lib)
   foreach(flag_var
            CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
            CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
@@ -100,8 +103,8 @@ if(UNIX AND NOT APPLE)
                          ${X11_CFLAGS_OTHER}
                          ${WEBKIT2GTK_CFLAGS_OTHER})
   target_link_libraries(${APP_NAME}
-                        optimized ${LIBYUE_DIR}/lib/libyue.a
-                        debug ${LIBYUE_DIR}/lib/libyued.a
+                        optimized ${LIBYUE_DIR}/Release/libyue.a
+                        debug ${LIBYUE_DIR}/Debug/libyue.a
                         pthread dl atomic
                         ${GTK3_LIBRARIES}
                         ${X11_LIBRARIES}
