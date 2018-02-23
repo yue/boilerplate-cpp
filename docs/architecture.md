@@ -63,21 +63,29 @@ Installs all dependencies and build Debug version.
 
 Calls `scripts/run.js` to start the Debug version.
 
+## Debugging
+
+By default the app is built in Debug mode, which has devtools and builtin
+context menu enabled, with a toolbar on the top of the webview. The debugging
+features are removed when buliding Release version with `npm run dist`.
+
+Note that devtools are currently only available on Linux and macOS.
+
 ## IDE support
 
 With the power of `cmake`, on macOS a Xcode project will be generated, and on
 Windows a Visual Studio 2017 solution will be generated. So you can develop your
-application by using the IDEs on macOS and Windows.
+application with the IDEs on macOS and Windows.
 
 Also note that due to limitations of `cmake`, we can only build for one CPU
-architecture for one IDE solution, it is not possible to build for both `x86`
+architecture per one IDE solution, it is not possible to build for both `x86`
 and `x64` within the same IDE solution.
 
 ## Cross compilation
 
 I haven't figured out the proper way of doing cross compilation on Linux with
-`cmake`, so currently you can only build for `x86` on a `x86` machine, and so
-are the other architectures.
+`cmake`, so on Linux currently you can only build for `x86` on a `x86` machine,
+and so are the other architectures.
 
 For Windows you can set the `npm_config_arch` environment variable to specify
 the architecture to build for (`x64` or `ia32`), if not set the target
