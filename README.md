@@ -27,7 +27,7 @@ cross-platform desktop apps with system webview and native GUI widgets.
 * [Add native bindings to web pages](https://github.com/yue/muban/blob/master/docs/native_bindings.md)
 * [Custom protocol](https://github.com/yue/muban/blob/master/docs/custom_protocol.md)
 * [Sample Yue apps with screenshots](https://github.com/yue/yue-sample-apps)
-* [Yue documents (external link)](http://libyue.com/docs/v0.3.0/cpp/)
+* [Yue documents (external link)](http://libyue.com/docs/v0.3.1/cpp/)
 
 ## License
 
