@@ -108,9 +108,7 @@ if(UNIX AND NOT APPLE)
                          ${GTK3_CFLAGS_OTHER}
                          ${X11_CFLAGS_OTHER}
                          ${WEBKIT2GTK_CFLAGS_OTHER})
-  target_compile_definitions(${APP_NAME} PUBLIC
-                             USE_GLIB=1 OFFICIAL_BUILD
-                             $<$<CONFIG:Debug>:_GLIBCXX_DEBUG=1>)
+  target_compile_definitions(${APP_NAME} PUBLIC USE_GLIB=1 OFFICIAL_BUILD)
   target_link_libraries(${APP_NAME}
                         optimized ${LIBYUE_DIR}/Release/libyue.a
                         debug ${LIBYUE_DIR}/Debug/libyue.a
