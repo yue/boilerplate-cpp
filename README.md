@@ -76,6 +76,6 @@ not have accessibility implemented yet, while it is of high priority on my TODO
 list, please only use the widgets with accessibility implemented (for example
 webview and text editor) if this is important to you.
 
-[mac-browser]: https://user-images.githubusercontent.com/639601/36702951-b77ffa22-1b9c-11e8-80ae-dd4107313db6.png
-[win-browser]: https://user-images.githubusercontent.com/639601/36702980-d5035558-1b9c-11e8-8c16-257154823ed7.png
-[linux-browser]: https://user-images.githubusercontent.com/639601/36702953-b7ce2f30-1b9c-11e8-98b5-b0df68c608f4.png
+[mac-browser]: https://user-images.githubusercontent.com/639601/36703168-bcaedb8e-1b9d-11e8-8260-89eef8157adc.png
+[win-browser]: https://user-images.githubusercontent.com/639601/36703170-bd14f70c-1b9d-11e8-91d8-86664431970c.png
+[linux-browser]: https://user-images.githubusercontent.com/639601/36703169-bceaeafc-1b9d-11e8-9cd4-70a030d9ebe5.png
