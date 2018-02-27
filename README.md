@@ -68,7 +68,7 @@ from the executable files.
 
 ### Accessibility
 
-On macOS and Linux, widgets of Yue are just wrappers of existing naitve widgets,
+On macOS and Linux, widgets of Yue are just wrappers of existing native widgets,
 so you have the same level of accessibility with system toolkits.
 
 However on Windows certain widgets (for example buttons) are windowless and do
