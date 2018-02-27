@@ -21,12 +21,17 @@ cross-platform desktop apps with system webview and native GUI widgets.
 4. `npm start` to start the app
 5. `npm run dist` to create distribution
 
+## Screenshots (in Debug mode)
+
+|  macOS            |    Linux          |  Windows          |
+| ----------------- | ----------------- | ----------------- |
+| ![][mac-browser]  | ![][linux-browser] | ![][win-browser]  |
+
 ## Docs
 
 * [Architecture of Muban](https://github.com/yue/muban/blob/master/docs/architecture.md)
 * [Add native bindings to web pages](https://github.com/yue/muban/blob/master/docs/native_bindings.md)
 * [Custom protocol](https://github.com/yue/muban/blob/master/docs/custom_protocol.md)
-* [Sample Yue apps with screenshots](https://github.com/yue/yue-sample-apps)
 * [Yue documents (external link)](http://libyue.com/docs/v0.3.1/cpp/)
 
 ## License
@@ -70,3 +75,7 @@ However on Windows certain widgets (for example buttons) are windowless and do
 not have accessibility implemented yet, while it is of high priority on my TODO
 list, please only use the widgets with accessibility implemented (for example
 webview and text editor) if this is important to you.
+
+[mac-browser]: https://user-images.githubusercontent.com/639601/36702951-b77ffa22-1b9c-11e8-80ae-dd4107313db6.png
+[win-browser]: https://user-images.githubusercontent.com/639601/36702980-d5035558-1b9c-11e8-8c16-257154823ed7.png
+[linux-browser]: https://user-images.githubusercontent.com/639601/36702953-b7ce2f30-1b9c-11e8-98b5-b0df68c608f4.png
