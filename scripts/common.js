@@ -31,33 +31,6 @@ function mkdir(dir) {
   fs.mkdirSync(dir)
 }
 
-// Helper to download an URL.
-const download = (url, callback, log=true) => {
-  https.get(url, (response) => {
-    if (log) {
-      process.stdout.write(`Downloading ${url} `)
-    }
-    if (response.statusCode == 302) {
-      download(response.headers.location, callback, false)
-      return
-    }
-    let length = 0
-    response.on('end', () => {
-      if (length > 0)
-        process.stdout.write('.')
-      console.log(' Done')
-    })
-    .on('data', (chunk) => {
-      length += chunk.length
-      while (length >= 1024 * 1024) {
-        process.stdout.write('.')
-        length %= 1024 * 1024
-      }
-    })
-    callback(response)
-  })
-}
-
 // Helper around execSync.
 const execSyncWrapper = (command, options = {}) => {
   // Print command output by default.
@@ -84,7 +57,6 @@ module.exports = {
   targetCpu,
   cmake,
   mkdir,
-  download,
   execSync: execSyncWrapper,
   spawnSync: spawnSyncWrapper,
 }

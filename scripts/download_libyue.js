@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-const {targetCpu, download, mkdir} = require('./common')
+const {targetCpu} = require('./common')
 
-const fs      = require('fs')
-const path    = require('path')
-const extract = require('extract-zip')
+const fs   = require('fs')
+const path = require('path')
+
+const downloadYue = require('download-yue')
 
 if (process.argv.length < 3) {
   console.error('Usage: download_libyue version platform arch')
@@ -35,18 +36,7 @@ if (fs.existsSync(libyueChecksum) &&
   process.exit(0)
 }
 
-const mirror = 'https://github.com/yue/yue/releases/download'
-const zipname = `libyue_${version}_${platform}_${arch}.zip`
-const url = `${mirror}/${version}/${zipname}`
-
-download(url, (response) => {
-  mkdir(libyueDir)
-  const zippath = path.join(libyueDir, zipname)
-  response.on('end', () => {
-    extract(zippath, {dir: libyueDir}, (error) => {
-      fs.unlinkSync(zippath)
-      fs.writeFileSync(libyueChecksum, checksum)
-    })
-  })
-  response.pipe(fs.createWriteStream(zippath))
+const filename = `libyue_${version}_${platform}_${arch}.zip`
+downloadYue('yue', version, filename, libyueDir).then(() => {
+  fs.writeFileSync(libyueChecksum, checksum)
 })

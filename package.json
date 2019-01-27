@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node scripts/run.js",
     "install": "npm run download && npm run bootstrap && npm run build",
-    "download": "node scripts/download_libyue.js v0.3.1",
+    "download": "node scripts/download_libyue.js v0.6.1",
     "bootstrap": "node scripts/bootstrap.js",
     "build": "node scripts/build.js",
     "dist": "node scripts/dist.js"
@@ -19,7 +19,7 @@
   "devDependencies": {
     "asar": "0.14.x",
     "cmake-binaries": "1.0.5-2",
-    "extract-zip": "1.6.6",
+    "download-yue": "2.x",
     "yazl": "2.4.3"
   }
 }
