@@ -1,7 +1,12 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.13)
 
-# Target macOS version, Have to set this before creating project.
-set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
+if(APPLE)
+  # Target macOS version.
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
+elseif(WIN32)
+  # Use Windows 10 SDK.
+  set(CMAKE_SYSTEM_VERSION 10.0)
+endif()
 
 # Project name and executable name.
 project(muban)

@@ -18,7 +18,10 @@ if (process.platform == 'win32') {
   const platform = targetCpu == 'x64' ? 'x64' : 'Win32'
   process.exit(spawnSync(
     'msbuild',
-    [name + '.sln', '/p:Configuration=' + config, '/p:Platform=' + platform],
+    [name + '.sln',
+     '/m:' + os.cpus().length,
+     '/p:Configuration=' + config,
+     '/p:Platform=' + platform],
     {cwd: 'out', env}).status)
 } else {
   process.exit(spawnSync(
