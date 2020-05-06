@@ -2,6 +2,7 @@
 
 const {targetCpu, spawnSync} = require('./common')
 
+const os = require('os')
 const path = require('path')
 
 const name = require('../package.json').name
@@ -16,14 +17,12 @@ if (process.platform == 'win32') {
   const env = Object.assign(process.env, {PATH: vsPaths.join(path.delimiter)})
   const platform = targetCpu == 'x64' ? 'x64' : 'Win32'
   process.exit(spawnSync(
-      'msbuild',
-      [name + '.sln', '/p:Configuration=' + config, '/p:Platform=' + platform],
-      {cwd: 'out', env}).status)
-} else if (process.platform == 'darwin') {
-  process.exit(spawnSync(
-      'xcodebuild',
-      ['-configuration', config],
-      {cwd: 'out'}).status)
+    'msbuild',
+    [name + '.sln', '/p:Configuration=' + config, '/p:Platform=' + platform],
+    {cwd: 'out', env}).status)
 } else {
-  process.exit(spawnSync('make', [], {cwd: `out/${config}`}).status)
+  process.exit(spawnSync(
+    'make',
+    ['-j', os.cpus().length],
+    {cwd: `out/${config}`}).status)
 }

@@ -33,4 +33,4 @@ function appendMeta() {
   fs.appendFileSync(target, meta)
 }
 
-asar.createPackageWithOptions(source, target, { transform }, appendMeta)
+asar.createPackageWithOptions(source, target, { transform }).then(appendMeta)

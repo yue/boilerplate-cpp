@@ -12,12 +12,9 @@ const {name, version} = require('../package.json')
 execSync('node scripts/build.js Release')
 
 // Path to generated exe.
-const outpath = process.platform == 'linux' ? 'out/Release' : 'out'
-const exepath = {
-  win32: `${outpath}/Release/${name}.exe`,
-  darwin: `${outpath}/Release/${name}`,
-  linux: `${outpath}/${name}`,
-}[process.platform]
+const outpath = process.platform === 'win32' ? 'out' : 'out/Release'
+const exepath = process.platform === 'win32' ? `${outpath}/Release/${name}.exe`
+                                             : `${outpath}/${name}`
 
 // Concat the exe and app.ear.
 fs.appendFileSync(exepath, fs.readFileSync(`${outpath}/app.ear`))

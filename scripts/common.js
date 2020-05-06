@@ -17,7 +17,7 @@ const targetCpu = {
 }[narch]
 
 // Find the path of cmake.
-const cmakeRoot = path.resolve('node_modules', 'cmake-binaries', 'bin2')
+const cmakeRoot = path.resolve('node_modules', '@zcbenz', 'cmake-binaries', 'bin2')
 const cmake = {
   darwin: path.join(cmakeRoot, 'CMake.app', 'Contents', 'bin', 'cmake'),
   linux: path.join(cmakeRoot, 'bin', 'cmake'),
