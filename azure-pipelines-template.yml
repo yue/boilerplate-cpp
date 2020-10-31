@@ -8,7 +8,5 @@ steps:
     versionSpec: '2.7'
     architecture: 'x64'
 
-- bash: |
-    npm install
-    npm run dist
+- bash: npm install && npm run dist
   displayName: Build
