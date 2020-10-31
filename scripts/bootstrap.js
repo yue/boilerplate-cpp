@@ -6,13 +6,11 @@ const {targetCpu, cmake, mkdir, spawnSync} = require('./common')
 
 mkdir('out')
 
-if (process.platform === 'win32') {
-  let generator = 'Visual Studio 15 2017'
-  if (targetCpu == 'x64')
-    generator += ' Win64'
+if (process.platform == 'win32') {
   process.exit(spawnSync(cmake,
-                         ['..', '-G', generator],
-                         {cwd: 'out'}).status)
+                         ['-S', '.', '-B', 'out',
+                          '-G', 'Visual Studio 16 2019',
+                          '-A', targetCpu == 'x64' ? 'x64' : 'Win32']).status)
 } else {
   mkdir('out/Release')
   let code = spawnSync(cmake,

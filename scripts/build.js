@@ -10,8 +10,8 @@ const config = process.argv[2] ? process.argv[2] : 'Debug'
 
 if (process.platform == 'win32') {
   const vsPaths = [
-    'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\MSBuild\\15.0\\Bin',
-    'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Enterprise\\MSBuild\\15.0\\Bin',
+    'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\MSBuild\\Current\\Bin',
+    'C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin',
     process.env.PATH
   ]
   const env = Object.assign(process.env, {PATH: vsPaths.join(path.delimiter)})
