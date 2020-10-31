@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node scripts/run.js",
     "install": "npm run download && npm run bootstrap && npm run build",
-    "download": "node scripts/download_libyue.js v0.9.0",
+    "download": "node scripts/download_libyue.js v0.9.1",
     "bootstrap": "node scripts/bootstrap.js",
     "build": "node scripts/build.js",
     "dist": "node scripts/dist.js"
