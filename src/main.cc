@@ -40,9 +40,9 @@ int main(int argc, const char *argv[]) {
 
   // In Debug build, load from app.ear; in Release build, load from exe path.
 #if defined(NDEBUG)
-  PathService::Get(base::FILE_EXE, &g_app_path);
+  base::PathService::Get(base::FILE_EXE, &g_app_path);
 #else
-  PathService::Get(base::DIR_EXE, &g_app_path);
+  base::PathService::Get(base::DIR_EXE, &g_app_path);
 #if defined(OS_WIN)
   g_app_path = g_app_path.DirName();
 #endif
