@@ -21,10 +21,10 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "CompanyName", "Yue"
-            VALUE "ProductName", "Muban"
+            VALUE "ProductName", "Boilerplate"
             VALUE "FileDescription", "Build cross-platform desktop apps"
-            VALUE "OriginalFilename", "muban.exe"
-            VALUE "InternalName", "muban"
+            VALUE "OriginalFilename", "boilerplate.exe"
+            VALUE "InternalName", "boilerplate"
             VALUE "LegalCopyright", "Public domain"
         END
     END

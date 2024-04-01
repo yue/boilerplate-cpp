@@ -16,11 +16,6 @@ const targetCpu = {
   arm64: 'arm64',
 }[narch]
 
-// Find the path of cmake.
-let cmake = path.resolve('node_modules', '@yogalayout', 'cmake-bin', 'bin', 'cmake')
-if (process.platform == 'win')
-  cmake += '.exe'
-
 // Make dir and ignore error.
 function mkdir(dir) {
   if (fs.existsSync(dir)) return
@@ -52,7 +47,6 @@ const spawnSyncWrapper = (exec, args, options = {}) => {
 // Export public APIs.
 module.exports = {
   targetCpu,
-  cmake,
   mkdir,
   execSync: execSyncWrapper,
   spawnSync: spawnSyncWrapper,

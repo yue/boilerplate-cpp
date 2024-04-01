@@ -13,9 +13,12 @@ project(boilerplate)
 set(APP_NAME "boilerplate")
 
 # The main executable.
-file(GLOB SRC_FILES "src/*.h" "src/*.cc" "src/*.rc" "src/*.xml" "src/*.ico")
+file(GLOB SRC_FILES "src/*.h" "src/*.cc")
 add_executable(${APP_NAME}
                ${SRC_FILES} "${CMAKE_CURRENT_BINARY_DIR}/encryption_key.h")
+if(WIN32)
+  target_sources(${APP_NAME} PRIVATE "src/exe.rc" "src/exe.manifest")
+endif()
 
 # Link with Yue.
 add_subdirectory(libyue)
