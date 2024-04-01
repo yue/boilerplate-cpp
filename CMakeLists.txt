@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 3.13)
 
 if(APPLE)
   # Target macOS version.
-  set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
+  set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0)
 elseif(WIN32)
   # Use Windows 10 SDK.
   set(CMAKE_SYSTEM_VERSION 10.0)
 endif()
 
 # Project name and executable name.
-project(muban)
-set(APP_NAME "muban")
+project(boilerplate)
+set(APP_NAME "boilerplate")
 
 # The main executable.
 file(GLOB SRC_FILES "src/*.h" "src/*.cc" "src/*.rc" "src/*.xml" "src/*.ico")

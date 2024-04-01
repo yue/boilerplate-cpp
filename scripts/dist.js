@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const yazl = require('yazl')
+const yazl = require('@indutny/yazl')
 
 const {targetCpu, execSync} = require('./common')
 

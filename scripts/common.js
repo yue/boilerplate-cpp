@@ -17,12 +17,9 @@ const targetCpu = {
 }[narch]
 
 // Find the path of cmake.
-const cmakeRoot = path.resolve('node_modules', '@zcbenz', 'cmake-binaries', 'bin2')
-const cmake = {
-  darwin: path.join(cmakeRoot, 'CMake.app', 'Contents', 'bin', 'cmake'),
-  linux: path.join(cmakeRoot, 'bin', 'cmake'),
-  win32: path.join(cmakeRoot, 'bin', 'cmake.exe'),
-}[process.platform]
+let cmake = path.resolve('node_modules', '@yogalayout', 'cmake-bin', 'bin', 'cmake')
+if (process.platform == 'win')
+  cmake += '.exe'
 
 // Make dir and ignore error.
 function mkdir(dir) {

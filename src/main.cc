@@ -15,7 +15,7 @@ static base::FilePath g_app_path;
 
 // Handle custom protocol.
 nu::ProtocolJob* CustomProtocolHandler(const std::string& url) {
-  std::string path = url.substr(sizeof("muban://app/") - 1);
+  std::string path = url.substr(sizeof("boilerplate://app/") - 1);
   nu::ProtocolAsarJob* job = new nu::ProtocolAsarJob(g_app_path, path);
   job->SetDecipher(std::string(ENCRYPTION_KEY, sizeof(ENCRYPTION_KEY)),
                    std::string("yue is good lib!"));
@@ -129,8 +129,8 @@ int main(int argc, const char *argv[]) {
 #endif
 
   // Set webview bindings and custom protocol.
-  nu::Browser::RegisterProtocol("muban", &CustomProtocolHandler);
-  browser->SetBindingName("muban");
+  nu::Browser::RegisterProtocol("boilerplate", &CustomProtocolHandler);
+  browser->SetBindingName("boilerplate");
   browser->AddBinding("showSysInfo", &ShowSysInfo);
 
   // Show window when page is loaded.
@@ -141,7 +141,7 @@ int main(int argc, const char *argv[]) {
     // Only activate for the first time.
     self->on_finish_navigation.Disconnect(id);
   });
-  browser->LoadURL("muban://app/index.html");
+  browser->LoadURL("boilerplate://app/index.html");
 
   // Enter message loop.
   nu::MessageLoop::Run();

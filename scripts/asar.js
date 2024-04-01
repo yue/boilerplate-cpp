@@ -2,7 +2,7 @@
 
 const crypto = require('crypto')
 const fs = require('fs')
-const asar = require('asar')
+const asar = require('@electron/asar')
 
 require('./common')
 

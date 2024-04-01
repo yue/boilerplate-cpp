@@ -1,6 +1,6 @@
-# Muban
+# boilerplate-cpp
 
-A template of the [Yue library](https://github.com/yue/yue) for building
+A C++ template of the [Yue library](https://github.com/yue/yue) for building
 cross-platform desktop apps with system webview and native GUI widgets.
 
 ## Features
@@ -29,10 +29,10 @@ cross-platform desktop apps with system webview and native GUI widgets.
 
 ## Docs
 
-* [Architecture of Muban](https://github.com/yue/muban/blob/master/docs/architecture.md)
-* [Add native bindings to web pages](https://github.com/yue/muban/blob/master/docs/native_bindings.md)
-* [Custom protocol](https://github.com/yue/muban/blob/master/docs/custom_protocol.md)
-* [Yue documents (external link)](http://libyue.com/docs/v0.3.1/cpp/)
+* [Architecture](https://github.com/yue/boilerplate-cpp/blob/master/docs/architecture.md)
+* [Add native bindings to web pages](https://github.com/yue/boilerplate-cpp/blob/master/docs/native_bindings.md)
+* [Custom protocol](https://github.com/yue/boilerplate-cpp/blob/master/docs/custom_protocol.md)
+* [Yue documents (external link)](http://libyue.com/docs/latest/cpp/)
 
 ## License
 

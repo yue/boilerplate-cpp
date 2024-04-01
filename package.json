@@ -1,12 +1,12 @@
 {
-  "name": "muban",
+  "name": "boilerplate",
   "private": true,
   "version": "0.1.0",
   "description": "Build desktop apps with system webview and native controls",
   "scripts": {
     "start": "node scripts/run.js",
     "install": "npm run download && npm run bootstrap && npm run build",
-    "download": "node scripts/download_libyue.js v0.9.1",
+    "download": "node scripts/download_libyue.js v0.15.1",
     "bootstrap": "node scripts/bootstrap.js",
     "build": "node scripts/build.js",
     "dist": "node scripts/dist.js"
@@ -17,9 +17,9 @@
   },
   "license": "public domain",
   "devDependencies": {
-    "@zcbenz/cmake-binaries": "1.3.17-2",
-    "asar": "3.x",
-    "download-yue": "2.x",
-    "yazl": "2.4.3"
+    "@electron/asar": "3.2.9",
+    "@indutny/yazl": "2.7.0",
+    "@yogalayout/cmake-bin": "3.28.0-1",
+    "download-yue": "2.x"
   }
 }
