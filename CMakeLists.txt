@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
-if(APPLE)
-  # Target macOS version.
-  set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0)
-elseif(WIN32)
-  # Use Windows 10 SDK.
+# Use Windows 10 SDK.
+if(WIN32)
   set(CMAKE_SYSTEM_VERSION 10.0)
 endif()
 
